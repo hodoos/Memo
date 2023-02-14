@@ -5,63 +5,79 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>로그인</title>
+<title>메모 입력</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
 <link rel="stylesheet" href="/static/css/style.css">
 </head>
 <body>
 
 	<div id="wrap">
 		<c:import url="/WEB-INF/jsp/include/header.jsp" />
-		<section class="contents d-flex justify-content-center">
-			<div class="join-box my-5">
-				<input type="text" placeholder="아이디" id="idInput" class="form-control mt-3">
-				<input type="password" placeholder="비밀번호" id="passwordInput" class="form-control mt-3">
-				<button type="button" id="loginBtn" class="btn btn-primary btn-block mt-3">로그인</button>
+		<section class="d-flex justify-content-center">
+			<div class="input-box my-5">
+				<h1 class="text-center mb-5">메모 입력</h1>
 				
-				<div class="text-center mt-4"><a href="/user/signup/view">회원가입</a></div>
+				<div class="d-flex mb-3">
+					<label class="col-2">제목 : </label>
+					<input type="text" class="form-control col-9" id="titleInput" >
+				</div>
+				<div>
+					<textarea rows="10" class="form-control mb-3" id="contentInput"></textarea>
+				</div>
+				<div>
+					<input type="file">
+				</div>
+				<div class="d-flex justify-content-between mt-5">
+					<a href="/post/list/view" class="btn btn-info">목록으로</a>
+					<button type="button" class="btn btn-primary" id="saveBtn">저장</button>
+				</div>
 			</div>
 		</section>
 		<c:import url="/WEB-INF/jsp/include/footer.jsp" />
+	
 	</div>
 	
 	<script>
 		$(document).ready(function(){
-			$("#loginBtn").on("click", function(){
-				let id = $("#idInput").val();
-				let password = $("#passwordInput").val();
+			
+			$("#saveBtn").on("click", function(){
+				let title = $("#titleInput").val();
+				let content = $("#contentInput").val();
 				
-				if(id == ""){
-					alert("아이디를 입력해주세요.");
+				
+				if(title == ""){
+					alert("제목을 입력해주세요");
 					return;
-				}	
-				if(password == ""){
-					alert("비밀번호를 입력해주세요");
+				}
+				if(content == ""){
+					alert("내용을 입력해주세요.");
 					return;
 				}
 				
 				$.ajax({
 					type:"post"
-					, url:"/user/signin"
-					, data:{"loginId":id, "password":password}
-					, success:function(data){
+					,url:"/post/create"
+					,data:{"title":title, "content":content}
+					,success:function(data){
+						
 						if(data.result == "success"){
-							alert("로그인 성공");
 							location.href = "/post/list/view";
-						} else {
-							alert("아이디 또는 비밀번호가 일치하지 않습니다.");
+						} else{
+							alert("메모 저장 실패");
 						}
 					}
-					, error:function(){
-						alert("로그인 에러");
+					,error:function(){
+						alert("메모 저장 에러");
 					}
+					
 				});
 			});
 		});
+	
 	</script>
-
 </body>
 </html>

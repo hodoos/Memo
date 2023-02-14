@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,7 +23,7 @@
 				<input type="password" placeholder="비밀번호" id="passwordInput" class="form-control mt-3">
 				<input type="password" placeholder="비밀번호 확인" id="passwordConfirmInput" class="form-control mt-3">
 				<input type="text" placeholder="이름" id="nameInput" class="form-control mt-3">
-				<input type="text" placeholder="생년월일" id="birthdayInput" class="form-control mt-3">
+				<input type="text" placeholder="생년월일" id="birthDayInput" class="form-control mt-3">
 				<input type="text" placeholder="이메일" id="emailInput" class="form-control mt-3">
 				
 				<button type="button" id="joinBtn" class="btn btn-primary btn-block mt-3">가입하기</button>
@@ -39,7 +39,7 @@
 				let password = $("#passwordInput").val();
 				let passwordConfirm = $("#passwordConfirmInput").val();
 				let name = $("#nameInput").val();
-				let birthday = $("#birthdayInput").val();
+				let birthDay = $("#birthDayInput").val();
 				let email = $("#emailInput").val();
 				
 				if(id == "") {
@@ -58,7 +58,7 @@
 					alert("이름을 입력하세요.");
 					return;
 				}
-				if(birthday == "") {
+				if(birthDay == "") {
 					alert("생년월일을 입력하세요.");
 					return;
 				}
@@ -70,7 +70,7 @@
 				$.ajax({
 					type:"post"
 					, url:"/user/signup"
-					, data:{"loginId":id, "password":password, "userName":name, "email":email, "birthday":birthday}
+					, data:{"loginId":id, "password":password, "userName":name, "email":email, "birthDay":birthDay}
 					, success:function(data){
 						if(data.result == "success"){
 							alert("성공")
