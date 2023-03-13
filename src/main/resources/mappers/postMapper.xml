@@ -13,6 +13,7 @@
 			`userId`
 			, `title`
 			, `content`
+			, `imagePath`
 			, `createdAt`
 			, `updatedAt`
 		)
@@ -21,6 +22,7 @@
 			#{userId}
 			, #{title}
 			, #{content}
+			, #{imagePath}
 			, now()
 			, now()
 		)			
@@ -32,6 +34,7 @@
 			, `userId`
 			, `title`
 			, `content`
+			, `imagePath`
 			, `createdAt`
 			, `updatedAt`
 		FROM
@@ -49,6 +52,7 @@
 			, `userId`
 			, `title`
 			, `content`
+			, `imagePath`
 			, `createdAt`
 			, `updatedAt`
 		FROM
@@ -56,4 +60,23 @@
 		WHERE
 			`id` = #{postId}
 	</select>
+	
+	<update id="updatePost" parameterType="map">
+		UPDATE
+			`post`
+		SET
+			`title` = #{title}
+			, `content` = #{content}
+			, `updatedAt` = now()
+		WHERE
+			`id` = #{postId}
+			
+	</update>
+	
+	<delete id="deletePost" parameterType="int">
+		DELETE FROM
+			`post`
+		WHERE
+			`id` = #{postId}
+	</delete>
 </mapper>

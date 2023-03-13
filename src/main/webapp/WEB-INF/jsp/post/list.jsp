@@ -11,7 +11,7 @@
 <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
 <link rel="stylesheet" href="/static/css/style.css">
 </head>
 <body>
@@ -19,7 +19,7 @@
 		<c:import url="/WEB-INF/jsp/include/header.jsp" />
 		<section class="d-flex justify-content-center">
 			<div class="list-box my-5">
-				<h1 class="text-center">메모 리스트</h1>
+				<h1 class="text-center"><i class="bi bi-box-arrow-right"></i>메모 리스트</h1>
 				
 				<table class="table text-center">
 					<thead>
@@ -33,7 +33,7 @@
 					<c:forEach var="post" items="${postList }">
 						<tr>
 							<td>${post.id }</td>
-							<td><a href="/post/detail/view?=postId=${post.id }">${post.title }</a></td>
+							<td><a href="/post/detail/view?postId=${post.id }">${post.title }</a></td>
 							<td><fmt:formatDate value="${post.createdAt }" pattern="yyyy-MM-dd HH:mm:ss" /></td>
 						</tr>
 					</c:forEach>
